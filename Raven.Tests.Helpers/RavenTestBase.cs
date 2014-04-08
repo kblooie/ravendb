@@ -37,12 +37,12 @@ namespace Raven.Tests.Helpers
             ravenTestFixture.ModifyStore = ModifyStore;
         }
 
-        public List<RavenDbServer> servers
+        public List<RavenDbServer> Servers
         {
             get { return ravenTestFixture.Servers; }
         }
 
-        public List<IDocumentStore> stores
+        public List<IDocumentStore> Stores
         {
             get { return ravenTestFixture.Stores; }
         }

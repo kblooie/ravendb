@@ -30,7 +30,7 @@ namespace Raven.Tests.Bundles.Replication.Async
 
 			WaitForReplication(store2);
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenAsyncSession())
 			{
@@ -60,7 +60,7 @@ namespace Raven.Tests.Bundles.Replication.Async
 
 			WaitForReplication(store2);
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenAsyncSession())
 			{
@@ -88,7 +88,7 @@ namespace Raven.Tests.Bundles.Replication.Async
 
 			WaitForReplication(store2);
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenAsyncSession())
 			{
@@ -123,7 +123,7 @@ namespace Raven.Tests.Bundles.Replication.Async
 
 			WaitForReplication(store2);
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenAsyncSession())
 			{

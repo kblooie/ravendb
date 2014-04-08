@@ -86,7 +86,7 @@ namespace Raven.Tests.Bundles.Replication
 
 				WaitForDocument(store2.DatabaseCommands.ForDatabase("FailoverTest"), "items/1");
 
-				servers[0].Dispose();
+				Servers[0].Dispose();
 
 				using (var session = store.OpenSession())
 				{
@@ -123,7 +123,7 @@ namespace Raven.Tests.Bundles.Replication
 
 				WaitForDocument(store2.DatabaseCommands.ForDatabase("FailoverTest"), "items/1");
 
-				servers[0].Dispose();
+				Servers[0].Dispose();
 
 				using (var session = store.OpenSession())
 				{

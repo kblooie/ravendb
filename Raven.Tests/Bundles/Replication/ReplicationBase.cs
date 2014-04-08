@@ -35,13 +35,13 @@ namespace Raven.Tests.Bundles.Replication
 
 		public IDocumentStore CreateStore(bool enableCompressionBundle = false, bool removeDataDirectory = true, Action<DocumentStore> configureStore = null, AnonymousUserAccessMode anonymousUserAccessMode = AnonymousUserAccessMode.Admin, bool enableAuthorization = false, string requestedStorage = null)
 		{
-			var port = PortRangeStart - stores.Count;
+			var port = PortRangeStart - Stores.Count;
 			return CreateStoreAtPort(port, enableCompressionBundle, removeDataDirectory, configureStore, anonymousUserAccessMode, enableAuthorization, requestedStorage);
 		}
 
         public EmbeddableDocumentStore CreateEmbeddableStore(bool enableCompressionBundle = false, bool removeDataDirectory = true, Action<DocumentStore> configureStore = null, AnonymousUserAccessMode anonymousUserAccessMode = AnonymousUserAccessMode.Admin)
 		{
-			var port = PortRangeStart - stores.Count;
+			var port = PortRangeStart - Stores.Count;
 			return CreateEmbeddableStoreAtPort(port, enableCompressionBundle, removeDataDirectory, configureStore, anonymousUserAccessMode);
 		}
 
@@ -55,7 +55,7 @@ namespace Raven.Tests.Bundles.Replication
 									  {
 										  Settings = { { "Raven/ActiveBundles", "replication" + (enableCompressionBundle ? ";compression" : string.Empty) } },
 										  AnonymousUserAccessMode = anonymousUserAccessMode,
-										  DataDirectory = Path.Combine("Database #" + stores.Count, "SysDb"),
+										  DataDirectory = Path.Combine("Database #" + Stores.Count, "SysDb"),
 										  RunInUnreliableYetFastModeThatIsNotSuitableForProduction = true,
 										  RunInMemory = storageType.Equals("esent", StringComparison.OrdinalIgnoreCase) == false,
 										  Port = port,
@@ -70,7 +70,7 @@ namespace Raven.Tests.Bundles.Replication
 
 			serverConfiguration.PostInit();
 			var ravenDbServer = new RavenDbServer(serverConfiguration);
-			servers.Add(ravenDbServer);
+			Servers.Add(ravenDbServer);
 
 			if (enableAuthorization)
 			{
@@ -84,7 +84,7 @@ namespace Raven.Tests.Bundles.Replication
 				configureStore(documentStore);
 			documentStore.Initialize();
 
-			stores.Add(documentStore);
+			Stores.Add(documentStore);
 
 			ConfigureDatabase(ravenDbServer.Database);
 			return documentStore;
@@ -101,7 +101,7 @@ namespace Raven.Tests.Bundles.Replication
 				{
 					Settings = { { "Raven/ActiveBundles", "replication" + (enableCompressionBundle ? ";compression" : string.Empty) } },
 					AnonymousUserAccessMode = anonymousUserAccessMode,
-					DataDirectory = "Data #" + stores.Count,
+					DataDirectory = "Data #" + Stores.Count,
 					RunInUnreliableYetFastModeThatIsNotSuitableForProduction = true,
 					RunInMemory = true,
 					Port = port,
@@ -119,7 +119,7 @@ namespace Raven.Tests.Bundles.Replication
 				configureStore(embeddedStore);
 			embeddedStore.Initialize();
 
-			stores.Add(embeddedStore);
+			Stores.Add(embeddedStore);
 
 			return embeddedStore;
 		}
@@ -139,13 +139,13 @@ namespace Raven.Tests.Bundles.Replication
 
 		public void StopDatabase(int index)
 		{
-			var previousServer = servers[index];
+			var previousServer = Servers[index];
 			previousServer.Dispose();
 		}
 
 		public void StartDatabase(int index)
 		{
-			var previousServer = servers[index];
+			var previousServer = Servers[index];
 
 			NonAdminHttp.EnsureCanListenToWhenInNonAdminContext(previousServer.Database.Configuration.Port);
 			var serverConfiguration = new RavenConfiguration
@@ -163,14 +163,14 @@ namespace Raven.Tests.Bundles.Replication
 			serverConfiguration.PostInit();
 			var ravenDbServer = new RavenDbServer(serverConfiguration);
 
-			servers[index] = ravenDbServer;
+			Servers[index] = ravenDbServer;
 		}
 
 		public IDocumentStore ResetDatabase(int index, bool enableAuthentication = false)
 		{
-			stores[index].Dispose();
+			Stores[index].Dispose();
 
-			var previousServer = servers[index];
+			var previousServer = Servers[index];
 			previousServer.Dispose();
 			IOExtensions.DeleteDirectory(previousServer.Database.Configuration.DataDirectory);
 
@@ -189,7 +189,7 @@ namespace Raven.Tests.Bundles.Replication
 
 		protected void TellInstanceToReplicateToAnotherInstance(int src, int dest, string apiKey = null, string username = null, string password = null, string domain = null)
 		{
-			RunReplication(stores[src], stores[dest], apiKey: apiKey, username: username, password: password, domain: domain);
+			RunReplication(Stores[src], Stores[dest], apiKey: apiKey, username: username, password: password, domain: domain);
 		}
 
 		protected void RunReplication(IDocumentStore source, IDocumentStore destination,

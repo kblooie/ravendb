@@ -123,7 +123,7 @@ namespace Raven.Tests.Security
 			var serverClient = ((ServerClient)store1.DatabaseCommands);
 			serverClient.ReplicationInformer.RefreshReplicationInformation(serverClient);
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenSession())
 			{
@@ -152,7 +152,7 @@ namespace Raven.Tests.Security
 			var serverClient = ((ServerClient)store1.DatabaseCommands);
 			serverClient.ReplicationInformer.RefreshReplicationInformation(serverClient);
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenAsyncSession())
 			{
@@ -181,7 +181,7 @@ namespace Raven.Tests.Security
 			var serverClient = ((ServerClient)store2.DatabaseCommands);
 			serverClient.ReplicationInformer.RefreshReplicationInformation(serverClient);
 
-			servers[1].Dispose();
+			Servers[1].Dispose();
 
 			using (var session = store2.OpenSession())
 			{
@@ -210,7 +210,7 @@ namespace Raven.Tests.Security
 			var serverClient = ((ServerClient)store2.DatabaseCommands);
 			serverClient.ReplicationInformer.RefreshReplicationInformation(serverClient);
 
-			servers[1].Dispose();
+			Servers[1].Dispose();
 
 			using (var session = store2.OpenAsyncSession())
 			{

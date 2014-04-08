@@ -275,7 +275,7 @@ namespace Raven.Tests.Bundles.Replication
 			Assert.NotNull(company);
 			Assert.Equal("Hibernating Rhinos", company.Name);
 
-			foreach (var ravenDbServer in servers)
+			foreach (var ravenDbServer in Servers)
 			{
 				ravenDbServer.Database.TransactionalStorage.Batch(
 					accessor => Assert.Null(accessor.Lists.Read("Raven/Replication/Docs/Tombstones", "companies/1")));

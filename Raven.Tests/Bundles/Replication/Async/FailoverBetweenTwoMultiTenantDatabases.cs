@@ -88,7 +88,7 @@ namespace Raven.Tests.Bundles.Replication.Async
 
 				WaitForDocument(store2.DatabaseCommands.ForDatabase("FailoverTest"), "items/1");
 
-				servers[0].Dispose();
+				Servers[0].Dispose();
 
 				using (var session = store.OpenAsyncSession())
 				{
@@ -134,7 +134,7 @@ namespace Raven.Tests.Bundles.Replication.Async
 
 				WaitForDocument(store2.DatabaseCommands.ForDatabase("FailoverTest"), "items/1");
 
-				servers[0].Dispose();
+				Servers[0].Dispose();
 
 				using (var session = store.OpenAsyncSession())
 				{

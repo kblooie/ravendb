@@ -40,7 +40,7 @@ namespace Raven.Tests.Bundles.Replication
 					.Wait();
 				Assert.Equal(2, replicationInformerForDatabase.ReplicationDestinationsUrls.Count);
 
-				foreach (var ravenDbServer in servers)
+				foreach (var ravenDbServer in Servers)
 				{
 					ravenDbServer.Server.ResetNumberOfRequests();
 				}
@@ -53,7 +53,7 @@ namespace Raven.Tests.Bundles.Replication
 					}
 				}
 			}
-			foreach (var ravenDbServer in servers)
+			foreach (var ravenDbServer in Servers)
 			{
 				Assert.Equal(2, ravenDbServer.Server.NumberOfRequests);
 			}
@@ -92,7 +92,7 @@ namespace Raven.Tests.Bundles.Replication
 					.Wait();
 				Assert.Equal(2, replicationInformerForDatabase.ReplicationDestinationsUrls.Count);
 
-				foreach (var ravenDbServer in servers)
+				foreach (var ravenDbServer in Servers)
 				{
 					ravenDbServer.Server.ResetNumberOfRequests();
 				}
@@ -108,9 +108,9 @@ namespace Raven.Tests.Bundles.Replication
 					}
 				}
 			}
-			Assert.Equal(6, servers[0].Server.NumberOfRequests);
-			Assert.Equal(0, servers[1].Server.NumberOfRequests);
-			Assert.Equal(0, servers[2].Server.NumberOfRequests);
+			Assert.Equal(6, Servers[0].Server.NumberOfRequests);
+			Assert.Equal(0, Servers[1].Server.NumberOfRequests);
+			Assert.Equal(0, Servers[2].Server.NumberOfRequests);
 		}
 	}
 }

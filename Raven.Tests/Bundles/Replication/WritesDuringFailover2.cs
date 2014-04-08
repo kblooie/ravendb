@@ -32,7 +32,7 @@ namespace Raven.Tests.Bundles.Replication
 
 			WaitForReplication(store2, "companies/1");
 
-			servers[0].Dispose();
+			Servers[0].Dispose();
 
 			using (var session = store1.OpenSession())
 			{
